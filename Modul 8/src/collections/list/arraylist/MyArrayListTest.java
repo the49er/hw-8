@@ -1,12 +1,12 @@
 package collections.list.arraylist;
 
-/* Class MyArrayList is able to implement following methods:
-   - add() - to add a new element in array;
-   - remove(int index) - removes an element from the array by its index ;
-   - remove(T value) - removes the first found element from the array by its value;
-   - size() - to receive array length;
-   - clear() - to remove all the elements from the array;
-   - get(int index) - to return the value from the array by its index;
+/** Class {@link MyArrayList} is able to implement following methods:
+ * - add() - adds a new element at the end of the array;
+ * - remove(int index) - removes an element from the array by its index ;
+ * - remove(T value) - removes the first found element from the array by its value;
+ * - size() - receives array's length;
+ * - clear() - removes all the elements from the array;
+ * - get(int index) - returns a value from the array by its index;
  */
 
 public class MyArrayListTest {
