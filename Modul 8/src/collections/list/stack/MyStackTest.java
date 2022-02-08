@@ -12,7 +12,7 @@ import collections.list.queue.MyQueue;
  */
 
 public class MyStackTest {
-    public static void main(String[] args) throws ValueNotFounException {
+    public static void main(String[] args){
         MyStack stack = new MyStack();
 
         stack.push("Winter");
@@ -23,6 +23,7 @@ public class MyStackTest {
         System.out.println("stack = " + stack);
         System.out.println("stack.getSize() = " + stack.getSize());
 
+
         System.out.println("stack.peek() = " + stack.peek());
         System.out.println("stack.pop() = " + stack.pop());
         System.out.println("stack.getSize() = " + stack.getSize());
@@ -31,7 +32,22 @@ public class MyStackTest {
         stack.push("New Top");
         System.out.println("stack = " + stack);
 
-        stack.remove(2);
+
+
+        stack.clear();
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+
+        stack.push("Top");
+        stack.push("New Top");
+
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+        System.out.println(stack.pop());
+
 
 
     }

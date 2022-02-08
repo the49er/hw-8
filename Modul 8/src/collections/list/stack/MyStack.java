@@ -1,9 +1,6 @@
 package collections.list.stack;
 
-import collections.list.linkedlist.Node;
 import collections.list.queue.MyQueue;
-
-import javax.lang.model.type.MirroredTypeException;
 
 public class MyStack<T> {
 
@@ -41,13 +38,24 @@ public class MyStack<T> {
     }
 
     public T peek() {
-        return this.first.getValue();
+        T peekStack = null;
+        try {
+            peekStack = this.first.getValue();
+        }catch (NullPointerException ex) {
+            ex.getStackTrace();
+        }
+        return peekStack;
     }
 
     public T pop () {
-        T retValue = this.first.getValue();
-        this.first = this.first.getNext();
-        size--;
+        T retValue = null;
+        try {
+            retValue = this.first.getValue();
+            this.first = this.first.next;
+            size--;
+        }catch (NullPointerException ex){
+            ex.getStackTrace();
+        }
         return retValue;
     }
 
@@ -56,33 +64,34 @@ public class MyStack<T> {
         size = 0;
     }
 
-    public void remove(int index) {
-
+    public T remove(int index) {
         if (index < 0 || index >= getSize()) {
             throw new IndexOutOfBoundsException("Invalid index: " + index + ", Size: " + getSize());
         }
         int i = -1;
-        Node<T> cur = first;
+        Node<T> nodeToRemove = first;
+        Node<T> connector = null;
 
-        while (cur != null) {
+        while (nodeToRemove != null) {
             if(index != 0) {
+                i++;
+                if (i == index) {
+                    if (connector == null) {
+                        first = first.next;
+                    } else {
+                        connector.next = nodeToRemove.next;
+                    }
+                    size--;
+                    return nodeToRemove.getValue();
 
-                if (i == index - 1) {
-                    if (cur.prev != null) {
-                        cur.prev.next = cur.next;
-                    }
-                    if (cur.next != null) {
-                        cur.next.prev = cur.prev;
-                    }
                 }
-            }else{
-                first = first.next;
-                break;
             }
-            cur = cur.next;
-            i++;
+            connector = nodeToRemove;
+            nodeToRemove = nodeToRemove.next;
+
         }
-        size--;
+
+        return null;
     }
 
     public int getSize() {
@@ -92,18 +101,16 @@ public class MyStack<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node<T> cur = first;
-        try {
+        if (cur != null) {
             sb.append(" <- " + cur.getValue());
 
             while (cur.getNext() != null) {
                 sb.append(" <- " + cur.getNext().getValue());
                 cur = cur.getNext();
             }
-        } catch (NullPointerException e) {
-            //System.out.println("MyQueue is empty");
+            return sb.toString();
         }
-
-        return sb.toString();
+        return null;
     }
 
     static class Node<T> {

@@ -21,30 +21,48 @@ public class MyQueueTest {
         queue.add("first");
         queue.add("second");
         queue.add("third");
-
-        System.out.println(queue.getSize());
-        System.out.println(queue);
-        queue.add("fourth");
-
-        System.out.println(queue);
-
-        queue.clear();
-        System.out.println(queue);
-        System.out.println(queue.getSize());
-
-        queue.add("first");
-        queue.add("second");
-        queue.add("third");
         queue.add("fourth");
         queue.add("five");
 
-        System.out.println(queue);
-        System.out.println(queue.getSize());
         System.out.println("queue.peek() = " + queue.peek());
 
-        System.out.println("queue.pop() = " + queue.poll());
+        queue.add("six");
+        queue.add("seven");
+        System.out.println("Size is: "+queue.getSize());
         System.out.println(queue);
-        System.out.println(queue.getSize());
 
+        System.out.println("queue.poll() = " + queue.poll());
+        System.out.println("Size is: "+queue.getSize());
+        System.out.println(queue);
+
+        queue.clear();
+        System.out.println("MyQueue has been cleared\n");
+        System.out.println(queue);
+        System.out.println("The size of MyQueue is: "+queue.getSize());
+
+        queue.add("Monday");
+        queue.add("Tuesday");
+        queue.add("Wednesday");
+        queue.add("Thursday");
+        queue.add("Friday");
+
+
+        queue.remove(2);
+
+
+        System.out.println(queue);
+        System.out.println("The size of MyQueue is: "+queue.getSize());
+
+        System.out.println("queue.peek() = " + queue.peek());
+        System.out.println("queue.poll() = " + queue.poll());
+        System.out.println("The size of MyQueue is: "+queue.getSize());
+
+        System.out.println(queue);
+
+        System.out.println("MyQueue has been cleared\n");
+        queue.clear();
+        System.out.println("The size of MyQueue is: "+queue.getSize());
+        System.out.println("queue.peek() = " + queue.peek());
+        System.out.println("queue.poll() = " + queue.poll());
     }
 }

@@ -1,73 +1,82 @@
 package collections.list.queue;
 
-import collections.list.linkedlist.Node;
+import collections.list.linkedlist.MyLinkedList;
 import collections.list.stack.MyStack;
 
-import java.util.StringJoiner;
+public class MyQueue<T, size> {
 
-public class MyQueue<T> {
+    Node<T> first = null;
+    Node<T> last = null;
+    int size;
 
-    private Node<T> first;
-    private Node<T> last;
-
-    private int size;
-
-//    public MyQueue(Node<T> root) {
-//        this.root = root;
-//    }
 
     public void add(T value) {
-        Node<T> node = new Node<T>(value);
-        node.setNext(first);
-        first = node;
+        Node<T> newNode = new Node<>(value);
+        if (this.first == null) {
+            this.first = newNode;
+            this.last = newNode;
+        }
+        this.last.next = newNode;
+        this.last = newNode;
+
         size++;
     }
 
-    public void remove(int index) {
-
+    public T remove(int index) {
         if (index < 0 || index >= getSize()) {
             throw new IndexOutOfBoundsException("Invalid index: " + index + ", Size: " + getSize());
         }
         int i = -1;
-        Node<T> cur = first;
+        Node<T> nodeToRemove = first;
+        Node<T> connector = null;
 
-        while (cur != null) {
-            if (index != 0) {
-                if (i == index - 1) {
-                    if (cur.prev != null) {
-                        cur.prev.next = cur.next;
+        while (nodeToRemove != null) {
+            if(index != 0) {
+                i++;
+                if (i == index) {
+                    if (connector == null) {
+                        first = first.next;
+                    } else {
+                        connector.next = nodeToRemove.next;
                     }
-                    if (cur.next != null) {
-                        cur.next.prev = cur.prev;
-                    }
+                    size--;
+                    return nodeToRemove.getValue();
+
                 }
-            } else {
-                first = first.next;
-                break;
             }
-            cur = cur.next;
-            i++;
+            connector = nodeToRemove;
+            nodeToRemove = nodeToRemove.next;
+
         }
-        size--;
+
+        return null;
     }
 
     public T peek() {
-        Node<T> result = first;
-        while (result.next != null) {
-            result = result.next;
+        T peekQueue = null;
+        try {
+            peekQueue = this.first.getValue();
+        } catch (NullPointerException ex) {
+            ex.getStackTrace();
         }
-        return result.getValue();
+        return peekQueue;
     }
 
     public T poll() {
-        T retValue = this.first.getValue();
-        this.first = this.first.getNext();
+        T pollQueue = null;
+        try {
+            pollQueue = this.first.getValue();
+            this.first = this.first.next;
+        }catch (NullPointerException ex) {
+            ex.getStackTrace();
+        }
         size--;
-        return retValue;
+        return pollQueue;
     }
 
     public void clear() {
         first = null;
+        last = null;
         size = 0;
     }
 
@@ -78,32 +87,29 @@ public class MyQueue<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node<T> cur = first;
-        try {
-            sb.append(cur.getValue() + " -> ");
+        if (cur != null) {
+            sb.append(cur.getValue() + " <- ");
 
             while (cur.getNext() != null) {
-                sb.append(cur.getNext().getValue() + " -> ");
+                sb.append(cur.getNext().getValue() + " <- ");
                 cur = cur.getNext();
             }
-        } catch (NullPointerException e) {
-            //System.out.println("MyQueue is empty");
+            return sb.toString();
         }
-
-        return sb.toString();
+        return null;
     }
 
-    static class Node<T> {
 
-        private T value;
-        private Node<T> next;
-        private Node<T> prev;
+    class Node<T> {
+
+        T value;
+        Node<T> next;
+        Node<T> prev;
 
         public Node(T value) {
             this.value = value;
-        }
-
-        public void setValue(T value) {
-            this.value = value;
+            this.next = null;
+            this.prev = null;
         }
 
         public T getValue() {

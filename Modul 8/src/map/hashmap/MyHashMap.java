@@ -70,13 +70,7 @@ class MyHashMap<K, V> {
         }
     }
 
-    public Set<K> keySet() {
-        Set<K> set = new HashSet<K>();
-        for (int i = 0; i < size; i++) {
-            set.add(values[i].getKey());
-        }
-        return set;
-    }
+ 
 
     @Override
     public String toString() {
@@ -84,7 +78,6 @@ class MyHashMap<K, V> {
             while (values[i] != null){
                     System.out.println(values[i].getKey() + ": " + values[i].getValue());
                     break;
-
            }
         }
         return "";

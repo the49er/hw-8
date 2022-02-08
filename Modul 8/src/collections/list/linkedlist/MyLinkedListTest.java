@@ -31,9 +31,11 @@ public class MyLinkedListTest {
         System.out.println("list.getSize() = " + list.getSize());
 
 
-        System.out.println("list.getIndex(4) = " + list.getIndex(4));
-        list.remove(4);
+        System.out.println("list.getIndex(3) = " + list.getIndex(3));
+        list.remove(3);
         System.out.println("list = " + list);
         System.out.println("list.getSize() = " + list.getSize());
+        list.clear();
+        System.out.println(list);
     }
 }

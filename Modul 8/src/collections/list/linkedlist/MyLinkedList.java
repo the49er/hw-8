@@ -96,18 +96,54 @@ public class MyLinkedList<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node<T> cur = first;
-        try {
-            sb.append(cur.getValue() + " -> ");
 
+        if (cur != null) {
+            sb.append(cur.getValue() + " -> ");
             while (cur.getNext() != null) {
                 sb.append(cur.getNext().getValue() + " -> ");
                 cur = cur.getNext();
             }
-            sb.append("null");
-        } catch (NullPointerException e) {
-            //System.out.println("MyLinkedList is empty");
+            String result = sb.substring(0, sb.length() - 4);
+            return result;
+        }
+        return null;
+
+    }
+
+    public class Node<T> {
+        T value;
+        Node<T> next ;
+        Node<T> prev ;
+
+
+        public Node(T value) {
+            this.value = value;
+
+
         }
 
-        return sb.toString();
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
+
+        public Node<T> getPrev() {
+            return prev;
+        }
+
+        public void setPrev(Node<T> prev) {
+            this.prev = prev;
+        }
     }
 }

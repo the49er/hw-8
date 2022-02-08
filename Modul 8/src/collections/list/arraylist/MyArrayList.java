@@ -80,11 +80,10 @@ public class MyArrayList<T> {
     @Override
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ");
-        try {
-            for (int i = 0; i < data.length - 1; i++) {
+        for (int i = 0; i < data.length - 1; i++) {
+            if (data[i] != null) {
                 stringJoiner.add(data[i].toString());
             }
-        } catch (NullPointerException e) {
         }
 
 
