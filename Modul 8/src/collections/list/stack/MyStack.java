@@ -22,17 +22,12 @@ public class MyStack<T> {
             newNode.prev = null;
             newNode.next = null;
         } else {
-              Node<T> tmp = first;
-              first = newNode;
-              first.next = tmp;
+            Node<T> tmp = first;
+            first = newNode;
+            first.next = tmp;
+            tmp.prev = first;
 
 
-
-
-
-//            last.next = newNode;
-//            newNode.prev = last;
-//            last = newNode;
         }
         size++;
     }
@@ -64,35 +59,57 @@ public class MyStack<T> {
         size = 0;
     }
 
-    public T remove(int index) {
+    public void remove(int index) {
         if (index < 0 || index >= getSize()) {
             throw new IndexOutOfBoundsException("Invalid index: " + index + ", Size: " + getSize());
         }
-        int i = -1;
-        Node<T> nodeToRemove = first;
-        Node<T> connector = null;
-
-        while (nodeToRemove != null) {
-            if(index != 0) {
-                i++;
-                if (i == index) {
-                    if (connector == null) {
-                        first = first.next;
-                    } else {
-                        connector.next = nodeToRemove.next;
-                    }
-                    size--;
-                    return nodeToRemove.getValue();
-
+        Node<T> currentNode = last;
+        if (size == 0) {
+            return;
+        } else {
+            if (index == 0) {
+                this.last = this.last.prev;
+                this.last.next = null;
+            } else {
+                for (int i = 1; i <= index; i++) {
+                    currentNode = currentNode.prev;
                 }
+                if (currentNode.prev != null) {
+                    currentNode.prev.next = currentNode.next;
+                } else {
+                    first = first.next;
+                }
+                currentNode.next.prev = currentNode.prev;
             }
-            connector = nodeToRemove;
-            nodeToRemove = nodeToRemove.next;
-
+            size--;
         }
-
-        return null;
     }
+
+//        int i = -1;
+//        Node<T> nodeToRemove = first;
+//        Node<T> connector = null;
+//
+//        while (nodeToRemove != null) {
+//            if(index != 0) {
+//                i++;
+//                if (i == index) {
+//                    if (connector == null) {
+//                        first = first.next;
+//                    } else {
+//                        connector.next = nodeToRemove.next;
+//                    }
+//                    size--;
+//                    return nodeToRemove.getValue();
+//
+//                }
+//            }
+//            connector = nodeToRemove;
+//            nodeToRemove = nodeToRemove.next;
+//
+//        }
+//
+//        return null;
+
 
     public int getSize() {
         return size;

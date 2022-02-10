@@ -15,40 +15,25 @@ public class MyStackTest {
     public static void main(String[] args){
         MyStack stack = new MyStack();
 
-        stack.push("Winter");
-        stack.push(123);
-        stack.push("Summer");
-        stack.push(32123);
+        stack.push("one");
+        stack.push("two");
+        stack.push("three");
+        stack.push("four");
+        stack.push("five");
+        stack.push("six");
+        stack.push("seven");
 
-        System.out.println("stack = " + stack);
-        System.out.println("stack.getSize() = " + stack.getSize());
-
-
-        System.out.println("stack.peek() = " + stack.peek());
-        System.out.println("stack.pop() = " + stack.pop());
         System.out.println("stack.getSize() = " + stack.getSize());
         System.out.println("stack = " + stack);
-        stack.push("Top");
-        stack.push("New Top");
+        stack.remove(2);
+        stack.remove(4);
+        stack.remove(4);
+
+        System.out.println("stack.getSize() = " + stack.getSize());
         System.out.println("stack = " + stack);
-
-
-
         stack.clear();
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
-
-        stack.push("Top");
-        stack.push("New Top");
-
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
-
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
-        System.out.println(stack.pop());
-
-
-
+        System.out.println("stack.getSize() = " + stack.getSize());
+        System.out.println("stack.pop() = " + stack.pop());
+        System.out.println("stack.peek() = " + stack.peek());
     }
 }

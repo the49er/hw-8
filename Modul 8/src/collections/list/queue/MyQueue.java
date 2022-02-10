@@ -41,14 +41,12 @@ public class MyQueue<T, size> {
                     }
                     size--;
                     return nodeToRemove.getValue();
-
                 }
             }
             connector = nodeToRemove;
             nodeToRemove = nodeToRemove.next;
 
         }
-
         return null;
     }
 
